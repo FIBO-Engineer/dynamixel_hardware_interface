@@ -44,6 +44,7 @@ Number	Name
 623	ffw_sg2_drive_1.model
 624	ffw_sg2_drive_2.model
 625	ffw_sg2_drive_3.model
+700	ffw_imu.model
 1000	xh430_w350.model
 1001	xd430_t350.model
 1010	xh430_w210.model

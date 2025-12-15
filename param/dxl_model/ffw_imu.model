@@ -1,0 +1,38 @@
+[unit info]
+Data Name	value	unit	Sign Type	Offset
+linear_acceleration.x	0.0047884033203125	m/s^2	signed	0.0
+linear_acceleration.y	0.0047884033203125	m/s^2	signed	0.0
+linear_acceleration.z	0.0047884033203125	m/s^2	signed	0.0
+angular_velocity.x	0.0010642251536550798	rad/s	signed	0.0
+angular_velocity.y	0.0010642251536550798	rad/s	signed	0.0
+angular_velocity.z	0.0010642251536550798	rad/s	signed	0.0
+orientation.w	0.0000001	1	signed	0.0
+orientation.x	0.0000001	1	signed	0.0
+orientation.y	0.0000001	1	signed	0.0
+orientation.z	0.0000001	1	signed	0.0
+Realtime Tick	1.0	ms	unsigned	0.0
+
+[control table]
+Address	Size	Data Name
+0	2	Model Number
+2	4	Model Information
+6	1	Firmware Version
+7	1	ID
+8	1	Baud Rate (Bus)
+9	1	Return Delay Time
+40	2	linear_acceleration.x
+42	2	linear_acceleration.y
+44	2	linear_acceleration.z
+46	2	angular_velocity.x
+48	2	angular_velocity.y
+50	2	angular_velocity.z
+65	1	LED
+68	1	Status Return Level
+69	1	Registered Instruction
+72	4	orientation.w
+76	4	orientation.x
+80	4	orientation.y
+84	4	orientation.z
+120	2	Realtime Tick
+168	2	Indirect Address 1
+224	1	Indirect Data 1
