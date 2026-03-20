@@ -630,6 +630,17 @@ hardware_interface::return_type DynamixelHardware::read(
           err_timeout_ms_ << "ms)");
 
       if (read_error_duration_.seconds() * 1000 >= err_timeout_ms_) {
+        RCLCPP_WARN_STREAM(
+          logger_,
+          "Communication error timeout exceeded. Attempting port recovery...");
+        if (dxl_comm_->ReopenPort() == DxlError::OK) {
+          RCLCPP_INFO_STREAM(logger_, "Port recovery successful. Resuming communication.");
+          is_read_in_error_ = false;
+          read_error_duration_ = rclcpp::Duration(0, 0);
+          dxl_status_ = DXL_OK;
+          return hardware_interface::return_type::OK;
+        }
+        RCLCPP_ERROR_STREAM(logger_, "Port recovery failed. Stopping hardware interface.");
         return hardware_interface::return_type::ERROR;
       }
       return hardware_interface::return_type::OK;

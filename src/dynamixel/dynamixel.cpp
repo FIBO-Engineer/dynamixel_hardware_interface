@@ -247,6 +247,40 @@ DxlError Dynamixel::SetupPort(const std::string & port_name, const std::string &
   return DxlError::OK;
 }
 
+DxlError Dynamixel::ReopenPort()
+{
+  if (!port_handler_) {
+    fprintf(stderr, "ReopenPort: port_handler_ is null\n");
+    return DxlError::OPEN_PORT_FAIL;
+  }
+
+  fprintf(stderr, "Closing port for recovery...\n");
+  port_handler_->closePort();
+
+  for (int attempt = 0; attempt < MAX_COMM_RETRIES; ++attempt) {
+    if (port_handler_->openPort()) {
+      fprintf(
+        stderr,
+        "Succeeded to reopen the port! (attempt %d/%d)\n",
+        attempt + 1,
+        MAX_COMM_RETRIES);
+      return DxlError::OK;
+    }
+
+    fprintf(
+      stderr,
+      "Failed to reopen the port! (attempt %d/%d)\n",
+      attempt + 1,
+      MAX_COMM_RETRIES);
+
+    if (attempt + 1 < MAX_COMM_RETRIES) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(250));
+    }
+  }
+
+  return DxlError::OPEN_PORT_FAIL;
+}
+
 DxlError Dynamixel::InitDxlComm(uint8_t comm_id, uint8_t id)
 {
   uint16_t dxl_model_number;

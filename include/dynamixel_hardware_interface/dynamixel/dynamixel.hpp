@@ -242,6 +242,7 @@ public:
 
   // DXL Communication Setting
   DxlError SetupPort(const std::string & port_name, const std::string & baudrate);
+  DxlError ReopenPort();
   DxlError InitDxlComm(uint8_t comm_id, uint8_t id);
   DxlError Reboot(uint8_t id);
   void RWDataReset();
